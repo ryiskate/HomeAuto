@@ -1,2 +1,2 @@
 # HomeAuto
-Repository for all things needed for my home automation like server, codes, datasheets, circuits, etc.
+The web interface for my home automation
