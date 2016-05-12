@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/jquery.mobile-1.4.5.min.css" />
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="/js/home_auto.js"></script>
+</head>
+<body>
+
+<div data-role="page">
+
+  <div data-role="header">
+    <h1><%= @title %></h1>
+  </div><!-- /header -->
+
+  <div data-role="content">
+  <form>
+    <label for="light-dimmer">Light dimmer:</label>
+    <input type="range" name="light-dimmer" id="light-dimmer" value="<%= @dimmer_value %>" min="0" max="100">
+
+    <fieldset>
+      <div data-role="fieldcontain">
+        <label for="switch-1">Switch 1:</label>
+        <input type="checkbox" class="switch" id="switch-1" <%= @switch_1 ? 'checked' : '' %> data-role="flipswitch" data-value="<%= @switch_1 %>">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div data-role="fieldcontain">
+        <label for="switch-2">Switch 2:</label>
+        <input type="checkbox" class="switch" id="switch-2" <%= @switch_2 ? 'checked' : '' %> data-role="flipswitch" data-value="<%= @switch_2 %>">
+      </div>
+    </fieldset>
+  </form>
+  </div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>
