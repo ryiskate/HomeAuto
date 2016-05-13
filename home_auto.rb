@@ -13,7 +13,7 @@ switches = [
   {id: "switch-quarto", status: true, name:"quarto"},
 ]
 
-get '/ri' do
+get '/' do
   @dimmers = dimmers
   @switches = switches
   @title = 'Home Auto'
