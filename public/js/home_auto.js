@@ -6,9 +6,8 @@ $(function(){
   });
 
   $('.switch').on('change', function(event) {
-    switch_value = !$(this).data('value');
-    switch_number = $(this).attr('id');
-    $(this).data('value', switch_value)
-    $.post('/set_switch', {switch_value: switch_value, switch_number: switch_number});
+    switch_status = $(this).is(':checked);
+    switch_id = $(this).attr('id');
+    $.post('/set_switch', {switch_status: switch_status, switch_id: switch_id});
   });
 })

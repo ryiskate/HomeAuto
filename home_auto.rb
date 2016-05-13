@@ -3,12 +3,12 @@ require 'sinatra'
 set :public_folder, 'public'
 
 dimmers = [{id: "dimmer-sala", value: 50, name: "sala"}, {id: "dimmer-cozinha", value: 50, name: "cozinha"}]
+switches = [{id: "switch-sala", status: true, name:"sala"}]
 
 get '/ri' do
   @dimmers = dimmers
+  @switches = switches
   @title = 'Home Auto'
-  @switch_1 = true
-  @switch_2 = false
   erb :index
 end
 
@@ -19,7 +19,7 @@ post '/set_dimmer' do
 end
 
 post '/set_switch' do
-  switch_number = params[:switch_number]
-  switch_value = params[:switch_value]
-  puts "Definindo o #{switch_number} como #{switch_value}"
+  switch_id = params[:switch_id]
+  switch_status = params[:switch_status]
+  puts "Definindo o #{switch_id} como #{switch_status}"
 end

@@ -22,20 +22,14 @@
       <label for="<%= dimmer[:id] %>"><%= dimmer[:name] %></label>
       <input type="range" class="dimmer" name="<%= dimmer[:id] %>" id="<%= dimmer[:id] %>" value="<%= dimmer[:value] %>" min="0" max="100">
     <% end %>
-    <fieldset>
-      <div data-role="fieldcontain">
-        <label for="switch-1">Switch 1:</label>
-        <input type="checkbox" class="switch" id="switch-1" <%= @switch_1 ? 'checked' : '' %> data-role="flipswitch" data-value="<%= @switch_1 %>">
-      </div>
-    </fieldset>
 
-    <fieldset>
-      <div data-role="fieldcontain">
-        <label for="switch-2">Switch 2:</label>
-        <input type="checkbox" class="switch" id="switch-2" <%= @switch_2 ? 'checked' : '' %> data-role="flipswitch" data-value="<%= @switch_2 %>">
-      </div>
-    </fieldset>
-  </form>
+    <% @switches.each do |switch| %>
+        <label for="<%= switch[:id] %>"><%= switch[:name] %></label>
+        <input type="checkbox" class="switch" id="<%= switch[:id] %>" <%= switch[:status] ? 'checked' : '' %> data-role="flipswitch">
+    <% end %>
+      
+
+    </form>
   </div><!-- /content -->
 
 </div><!-- /page -->
