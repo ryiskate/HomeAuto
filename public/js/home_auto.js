@@ -6,7 +6,7 @@ $(function(){
   });
 
   $('.switch').on('change', function(event) {
-    switch_status = $(this).is(':checked);
+    switch_status = $(this).is(':checked');
     switch_id = $(this).attr('id');
     $.post('/set_switch', {switch_status: switch_status, switch_id: switch_id});
   });
