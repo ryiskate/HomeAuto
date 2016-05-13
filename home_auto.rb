@@ -2,10 +2,18 @@ require 'sinatra'
 
 set :public_folder, 'public'
 
-dimmers = [{id: "dimmer-sala", value: 50, name: "sala"}, {id: "dimmer-cozinha", value: 50, name: "cozinha"}]
-switches = [{id: "switch-sala", status: true, name:"sala"}]
+dimmers = [
+  {id: "dimmer-sala", value: 50, name: "sala"},
+  {id: "dimmer-cozinha", value: 50, name: "cozinha"}
+]
 
-get '/ri' do
+switches = [
+  {id: "switch-sala", status: true, name:"sala"},
+  {id: "switch-corredor", status: true, name:"corredor"},
+  {id: "switch-quarto", status: true, name:"quarto"},
+]
+
+get '/' do
   @dimmers = dimmers
   @switches = switches
   @title = 'Home Auto'
