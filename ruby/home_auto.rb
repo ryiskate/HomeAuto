@@ -10,7 +10,6 @@ dimmers = [
 switches = [
   {id: "switch-sala", status: true, name:"sala"},
   {id: "switch-corredor", status: true, name:"corredor"},
-  {id: "switch-quarto", status: true, name:"quarto"},
 ]
 
 get '/' do
