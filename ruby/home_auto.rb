@@ -1,15 +1,15 @@
 require 'sinatra'
+require 'pi_piper'
 
 set :public_folder, 'public'
 
 dimmers = [
-  {id: "dimmer-sala", value: 50, name: "sala"},
-  {id: "dimmer-cozinha", value: 50, name: "cozinha"}
+  #{id: "dimmer-sala", value: 50, name: "sala"},
+  #{id: "dimmer-cozinha", value: 50, name: "cozinha"}
 ]
 
 switches = [
-  {id: "switch-sala", status: true, name:"sala"},
-  {id: "switch-corredor", status: true, name:"corredor"},
+  {id: "switch-sala", status: true, name:"sala", pin: PiPiper::Pin.new(:pin => 22, :direction => :out)}
 ]
 
 get '/' do
@@ -28,5 +28,12 @@ end
 post '/set_switch' do
   switch_id = params[:switch_id]
   switch_status = params[:switch_status]
+  switch = switches.find{|h| h[:id] == switch_id}
+  case switch_status
+    when 'true'
+      switch[:pin].on
+    when 'false'
+      switch[:pin].off
+  end
   puts "Definindo o #{switch_id} como #{switch_status}"
 end
