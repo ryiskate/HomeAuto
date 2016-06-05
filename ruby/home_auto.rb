@@ -1,32 +1,46 @@
-require 'sinatra'
+class HomeAuto
+  def initialize(config)
+    @config = config
+  end
 
-set :public_folder, 'public'
+  def dimmers
+    @config['dimmers'].map do |dimmer|
+      {
+        id: dimmer['id'],
+        value: 50,
+        name: dimmer['name']
+      }
+    end
+  end
 
-dimmers = [
-  {id: "dimmer-sala", value: 50, name: "sala"},
-  {id: "dimmer-cozinha", value: 50, name: "cozinha"}
-]
+  def find_dimmer(id)
+    dimmers.find{|h| h[:id] == id}
+  end
 
-switches = [
-  {id: "switch-sala", status: true, name:"sala"},
-  {id: "switch-corredor", status: true, name:"corredor"},
-]
+  def switches
+    @config['switches'].map do |switch|
+      {
+        id: switch['id'],
+        status: true,
+        name: switch['name'],
+        pin: PiPiper::Pin.new(:pin => switch['pin_num'], :direction => :out)
+      }
+    end
+  end
 
-get '/' do
-  @dimmers = dimmers
-  @switches = switches
-  @title = 'Home Auto'
-  erb :index
-end
+  def find_switch(id)
+    switches.find{|h| h[:id] == id}
+  end
 
-post '/set_dimmer' do
-  dimmer_value = params[:dimmer_value]
-  dimmer_id = params[:dimmer_id]
-  puts "Definindo o dimmer #{dimmer_id} em #{dimmer_value}"
-end
+  def set_switch(id, status)
+    case status
+    when 'true'
+      find_switch(id)[:pin].on
+    when 'false'
+      find_switch(id)[:pin].off
+    else
+      raise "invalid switch status: #{status}"
+    end
+  end
 
-post '/set_switch' do
-  switch_id = params[:switch_id]
-  switch_status = params[:switch_status]
-  puts "Definindo o #{switch_id} como #{switch_status}"
 end
